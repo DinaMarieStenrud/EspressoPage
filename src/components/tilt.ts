@@ -18,7 +18,7 @@ export function tiltCoffiepot(element: HTMLElement) {
     beansImg.classList.add('appear');
 
  
-    //pot Tilt
+    //pot Tilt 
     if (potTilt) {
       potTilt.classList.remove('show');   
       void potTilt.offsetWidth;           
@@ -34,24 +34,47 @@ export function tiltCoffiepot(element: HTMLElement) {
     }
 
 
-    //Bønnene som faller 
-    const delay = 500, duration = 3000;
-    setTimeout(() => {
-      const start = performance.now();
-      (function frame(now: number) {
-        const progress = Math.min((now - start) / duration, 1);
-        const rect = beansImg.getBoundingClientRect();
-        const targetY = window.scrollY + rect.bottom - window.innerHeight / 2;
-        window.scrollTo({ top: targetY, behavior: 'auto' });
-        if (progress < 1) requestAnimationFrame(frame);
-      })(start);
-    }, delay);
+let follow = false;
+
+function followScroll(beans: HTMLImageElement) {
+  if (!follow) return;
+  const rect = beans.getBoundingClientRect();
+  const targetY = window.scrollY + rect.bottom - window.innerHeight / 2;
+  window.scrollTo({ top: targetY, behavior: 'auto' });
+  requestAnimationFrame(() => followScroll(beans));
+}
 
 
-    // quote i bunnen av siden
-    beansImg.addEventListener('animationend', () => {
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
-      quote.classList.add('show');
-    }, { once: true });
+  beansImg.addEventListener('animationstart', () => {
+    follow = true;
+    requestAnimationFrame(() => followScroll(beansImg));
+  }, { once: true });
+
+
+  beansImg.addEventListener('animationend', () => {
+    follow = false;
+
+    const rect = beansImg.getBoundingClientRect();
+    const quoteY = window.scrollY + rect.bottom + 16; // 16px luft
+    const quoteX = window.scrollX + rect.left + rect.width / 2;
+
+    const need = quoteY + 200 - document.documentElement.scrollHeight;
+    const spacer = document.getElementById('spacer') as HTMLDivElement | null;
+    if (spacer && need > 0) spacer.style.height = `${need}px`;
+
+    quote.removeAttribute('hidden');
+    const q = quote as HTMLDivElement;
+    q.style.top = `${quoteY}px`;
+    q.style.left = `${quoteX}px`;
+    q.style.transform = 'translateX(-50%)';
+
+    requestAnimationFrame(() => q.classList.add('show'));
+
+  
+    window.scrollTo({ top: quoteY - window.innerHeight * 0.5, behavior: 'smooth' });
+  }, { once: true });
+
+
+
   });
 }

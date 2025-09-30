@@ -71,13 +71,21 @@ body {
 
 }
 
+#arrow {
+  position: absolute;
+  top: 200px;
+  left: -200px;
+  width: 100px;
+  cursor: pointer;
+  transform: scaleX(-1); 
+}
 
 
 
 #beans {
   display: none;             
   position: absolute;         
-  top: 90px;                
+  top: 160px;                
   left: 0px;                
   width: 100px;
   opacity: 0;
@@ -88,31 +96,80 @@ body {
 #beans.appear {
   display: block;            
   animation: fall 3s ease-in forwards;
-  animation-delay: 0.5s;
+  animation-delay: 1.5s;
 }
 
+
+
+
+#beans2 {
+          
+  position: absolute;         
+  top: 160px;                
+  left: 0px;                
+  width: 100px;
+  opacity: 1;
+  margin-left: 60px;
+               
+}
+
+
+/* Ikke gjør quote “fixed” lenger */
 #quote {
-  position: fixed;
-  font-style:oblique;
-  font-family:sans-serif;
-  font-weight: 600;
-  bottom: 0; left: 0;
-  width: 100%;
-  text-align: center;
-  color: black;
-  text-decoration: solid;
-  padding: .5rem;          
-  pointer-events: none;  
+  position: absolute;     /* vi setter top/left i JS */
   opacity: 0;
-  transition: opacity .3s ease;
+  transition: opacity .4s ease;
+  pointer-events: none;
+  
+}
+
+#quote.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#text {
+  color: black;
+  font-family: fantasy;
+}
+
+#machine {
+  margin-top: 100px;
+  width: 300px;
 }
 
 
-#quote.show { opacity: 1; }
+
+ul {
+  color: black;
+  font-family: fantasy;
+}
+
+h1 {
+  font-family: fantasy;
+  color: black;
+}
+
+#buttonRec {
+  position: static;          /* ikke absolute */
+  margin-top: .75rem;
+  margin-bottom: 100px;
+  font-family: fantasy;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px 20px;
+  
+}
+
+#buttonRec:hover{
+  background-color:rgb(171, 113, 113);
+}
+
 
 @keyframes fall {
   0%   { transform: translate(0, 0);        opacity: 1; }
-  100% { transform: translate(100px, 1300px); opacity: 1; }
+  100% { transform: translate(100px, 1500px); opacity: 1; }
 
 
 }
