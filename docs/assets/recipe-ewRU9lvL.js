@@ -1,4 +1,4 @@
-import"./style-D_2xh1s-.js";document.querySelector("#app").innerHTML=`
+import"./style-uS3xkslU.js";document.querySelector("#app").innerHTML=`
 
 
   <div>
