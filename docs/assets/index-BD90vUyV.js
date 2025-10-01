@@ -6,18 +6,12 @@
     <img id="arrow" src="images/arrow.png" alt="arrow" />
   </div>
 
-  <div id="recipe">
-    
-  </div>
-
+  <div id="recipe"></div>
 
   <div id="quote" hidden>
     <p id="text">"More espresso, less depresso."</p>
-    <a href="recipe.html">
-      <button id="buttonRec">Recipe</button>
-    </a>
+    <a id="buttonRec" href="./recipe.html">Recipe</a>
   </div>
 
   <div id="spacer" aria-hidden="true"></div>
-
 `;f(document.querySelector("#pot"));
