@@ -4,4 +4,4 @@ export function makeCoffieCup(element: HTMLElement){
         const coffieMachine = document.querySelector<HTMLImageElement>("coffieMachine");
         const beans = document.querySelector<HTMLImageElement>("beans2");
     })
-} */
+}  */
